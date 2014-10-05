@@ -25,12 +25,16 @@ class components_guestbook_back extends engine\singleton {
         return self::$instance;
     }
 
+	public function _update($from) {
+		database::getInstance()->con()->query("UPDATE ".property::getInstance()->get('db_prefix')."_extensions SET `version` = '1.0.1', `compatable` = '2.0.3' WHERE `type` = 'components' AND dir = 'guestbook'");
+	}
+	
     public function _version() {
         return '1.0.1';
     }
 
     public function _compatable() {
-        return '2.0.2';
+        return '2.0.3';
     }
 
     public function install() {
@@ -46,7 +50,7 @@ class components_guestbook_back extends engine\singleton {
                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
         database::getInstance()->con()->exec($query);
         $def_configs = 'a:3:{s:19:"count_guestmsg_page";s:2:"10";s:17:"timer_guestmsg_ip";s:3:"300";s:20:"premoderate_guestmsg";s:1:"1";}';
-        $stmt = database::getInstance()->con()->prepare("UPDATE ".property::getInstance()->get('db_prefix')."_extensions SET `configs` = ?, `version` = '1.0.1', `compatable` = '2.0.2' WHERE `type` = 'components' AND dir = 'guestbook'");
+        $stmt = database::getInstance()->con()->prepare("UPDATE ".property::getInstance()->get('db_prefix')."_extensions SET `configs` = ? WHERE `type` = 'components' AND dir = 'guestbook'");
         $stmt->bindParam(1, $def_configs, \PDO::PARAM_STR);
         $stmt->execute();
         $lang = array(
