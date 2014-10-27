@@ -10,13 +10,6 @@ use engine\router;
 use engine\meta;
 
 class components_guestbook_front extends engine\singleton {
-    protected static $instance = null;
-
-    public static function getInstance() {
-        if(is_null(self::$instance))
-            self::$instance = new self();
-        return self::$instance;
-    }
 
     public function make() {
         $params = array();

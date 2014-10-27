@@ -11,7 +11,6 @@ use engine\database;
 use engine\language;
 
 class components_guestbook_back extends engine\singleton {
-    protected static $instance = null;
 
     const ITEM_PER_PAGE = 10;
     const SEARCH_PER_PAGE = 50;
@@ -19,14 +18,8 @@ class components_guestbook_back extends engine\singleton {
     const FILTER_ALL = 0;
     const FILTER_MODERATE = 1;
 
-    public static function getInstance() {
-        if(is_null(self::$instance))
-            self::$instance = new self();
-        return self::$instance;
-    }
-
 	public function _update($from) {
-		database::getInstance()->con()->query("UPDATE ".property::getInstance()->get('db_prefix')."_extensions SET `version` = '1.0.1', `compatable` = '2.0.3' WHERE `type` = 'components' AND dir = 'guestbook'");
+		database::getInstance()->con()->query("UPDATE ".property::getInstance()->get('db_prefix')."_extensions SET `version` = '1.0.1', `compatable` = '2.0.4' WHERE `type` = 'components' AND dir = 'guestbook'");
 	}
 	
     public function _version() {
@@ -34,7 +27,7 @@ class components_guestbook_back extends engine\singleton {
     }
 
     public function _compatable() {
-        return '2.0.3';
+        return '2.0.4';
     }
 
     public function install() {
