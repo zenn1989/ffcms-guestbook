@@ -30,7 +30,7 @@ class components_guestbook_back extends engine\singleton {
         return '2.0.4';
     }
 
-    public function install() {
+    public function _install() {
         $query = "CREATE TABLE IF NOT EXISTS `".property::getInstance()->get('db_prefix')."_com_guestbook` (
                   `id` int(12) NOT NULL AUTO_INCREMENT,
                   `text` text NOT NULL,
@@ -163,7 +163,7 @@ class components_guestbook_back extends engine\singleton {
         return $content;
     }
 
-    public function accessData() {
+    public function _accessData() {
         return array(
             'admin/components/guestbook',
             'admin/components/guestbook/list',
